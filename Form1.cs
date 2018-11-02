@@ -61,5 +61,19 @@ namespace Constant_Length_Number_Generator
             }
             textBox1.Text = output;
         }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Only allow one '/'
+            if (e.KeyChar == '/' && textBox2.Text.Contains('/'))
+            {
+                e.Handled = true;
+            }
+            //Only allow numbers and control characters
+            else if (e.KeyChar != '/' && !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

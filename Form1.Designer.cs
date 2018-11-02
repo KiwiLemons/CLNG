@@ -70,6 +70,7 @@
             this.toolTip1.SetToolTip(this.textBox2, "Range of numbers generated, with a \'/\' separating the min and max values.\r\nEx: 0/" +
         "99\r\nIf left blank, the range will be assumed to be 0 through the largest number " +
         "representable with the given length.");
+            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // label2
             // 
