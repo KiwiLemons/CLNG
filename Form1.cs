@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -38,10 +39,10 @@ namespace Constant_Length_Number_Generator
                 else
                     throw ex;
             }
-            //need to add check if we have enough information to generate numbers.
+            //need to tell users what is wrong with thier inputs
 
-            //Generate the base that will be used to fill in blank spaces. A length of 4 will make this base '0000';
-            for (int i = 0; i < numericUpDown1.Value; i++) { genBase += "0"; }
+            //Generate the base that will be used to fill in blank spaces. A length of 4 will make a base of '0000';
+            for (int i = 0; i < (numericUpDown1.Value != 0 ? numericUpDown1.Value : rangeHigh.ToString().Length); i++) { genBase += "0"; }
 
             for (int i = rangeLow; i <= rangeHigh; i++)
             {

@@ -105,8 +105,9 @@
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(115, 22);
             this.numericUpDown1.TabIndex = 6;
-            this.toolTip1.SetToolTip(this.numericUpDown1, "Length of all the strings to to be.\r\nEx: With a length of 4, 0099 and 0100 is a p" +
-        "ossible output.");
+            this.toolTip1.SetToolTip(this.numericUpDown1, "Length of all the strings to to be.\r\nEx: With a length of 4, 0099 and 0100 are po" +
+        "ssible outputs.\r\nIf left as 0, it is automatically set to the length of the maxi" +
+        "mum");
             // 
             // button1
             // 
