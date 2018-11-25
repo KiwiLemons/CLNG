@@ -39,16 +39,20 @@ namespace Constant_Length_Number_Generator
                 else
                     throw ex;
             }
-            //need to tell users what is wrong with thier inputs
+            //Tell users what is wrong with thier inputs?
 
             //Generate the base that will be used to fill in blank spaces. A length of 4 will make a base of '0000';
             for (int i = 0; i < (numericUpDown1.Value != 0 ? numericUpDown1.Value : rangeHigh.ToString().Length); i++) { genBase += "0"; }
-
+            progressBar1.Minimum = rangeLow;
+            progressBar1.Maximum = rangeHigh;
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             for (int i = rangeLow; i <= rangeHigh; i++)
             {
+                progressBar1.Value = i;
                 try
                 {
-                    output += i != rangeLow ? $"\r\n{genBase.Substring(i.ToString().Length)}{i.ToString()}" : $"{genBase.Substring(i.ToString().Length)}{i.ToString()}";
+                    output += i == rangeLow ? $"{genBase.Substring(i.ToString().Length)}{i.ToString()}" : $"\r\n{new StringBuilder(genBase).Remove(0, i.ToString().Length)}{i.ToString()}";
                 }
                 catch (ArgumentOutOfRangeException ex)
                 {
@@ -59,7 +63,8 @@ namespace Constant_Length_Number_Generator
                         throw ex;
                 }
             }
-            textBox1.Text = output;
+            stopwatch.Stop();
+            textBox1.Text = output;//+ $"\r\n\r\n{stopwatch.ElapsedMilliseconds}";
         }
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
