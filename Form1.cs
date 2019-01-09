@@ -64,7 +64,7 @@ namespace Constant_Length_Number_Generator
                 }
             }
             stopwatch.Stop();
-            textBox1.Text = output;//+ $"\r\n\r\n{stopwatch.ElapsedMilliseconds}";
+            textBox1.Text = output + $"\r\n\r\n{stopwatch.ElapsedMilliseconds}";
         }
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
