@@ -80,5 +80,19 @@ namespace Constant_Length_Number_Generator
                 e.Handled = true;
             }
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.lengthPriority == true)
+                radioButton2.Checked = true;
+            else
+                radioButton1.Checked = true;
+        }
+        //Length radio button check changed
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.lengthPriority = radioButton2.Checked;
+            Properties.Settings.Default.Save();
+        }
     }
 }
