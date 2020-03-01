@@ -22,17 +22,5 @@ namespace Constant_Length_Number_Generator.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool lengthPriority {
-            get {
-                return ((bool)(this["lengthPriority"]));
-            }
-            set {
-                this["lengthPriority"] = value;
-            }
-        }
     }
 }

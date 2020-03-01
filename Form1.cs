@@ -10,9 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Constant_Length_Number_Generator
-{
-    //My explanations are bad I'm sorry
-    public partial class Form1 : Form
+{  public partial class Form1 : Form
     {
         public Form1()
         {
@@ -21,7 +19,7 @@ namespace Constant_Length_Number_Generator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string genBase = "", output = "";
+            string genBase = "";
             string[] ranges = textBox2.Text.Split('/');
             int rangeLow = ranges[0] == "" ? 0 : int.Parse(ranges[0]);
             int rangeHigh = 0;
@@ -47,24 +45,32 @@ namespace Constant_Length_Number_Generator
             progressBar1.Maximum = rangeHigh;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
+            string[] outputArray = new string[rangeHigh - rangeLow + 1];
+            int index = 0;
             for (int i = rangeLow; i <= rangeHigh; i++)
             {
-                progressBar1.Value = i;
+                
+                //Slows down the prgm a lil
+                if (i % 10 == 0) progressBar1.Value = i;
                 try
                 {
-                    output += i == rangeLow ? $"{genBase.Substring(i.ToString().Length)}{i.ToString()}" : $"\r\n{new StringBuilder(genBase).Remove(0, i.ToString().Length)}{i.ToString()}";
+                    string iString = i.ToString();
+                    outputArray[index] = $"{genBase.Substring(iString.Length)}{iString.ToString()}";
                 }
                 catch (ArgumentOutOfRangeException ex)
                 {
-                    //This happens when the rangeMax is larger than the largest number possible with the specified length Ex: 10000 has 5 digits and would trigger this is you specify length as 4
+                    //This happens when the rangeMax is larger than the largest number possible with the specified length
                     if (ex.Message.Contains("startIndex cannot be larger than length of string"))
                         break;
                     else
                         throw ex;
                 }
+                index += 1;
             }
+            textBox1.Text = string.Join("\r\n",outputArray);
+            progressBar1.Value = rangeHigh;
             stopwatch.Stop();
-            textBox1.Text = output + $"\r\n\r\n{stopwatch.ElapsedMilliseconds}";
+            label4.Text = $"{stopwatch.ElapsedMilliseconds}ms";
         }
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
@@ -83,16 +89,7 @@ namespace Constant_Length_Number_Generator
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.lengthPriority == true)
-                radioButton2.Checked = true;
-            else
-                radioButton1.Checked = true;
-        }
-        //Length radio button check changed
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.lengthPriority = radioButton2.Checked;
-            Properties.Settings.Default.Save();
+            label4.Text = "";
         }
     }
 }
