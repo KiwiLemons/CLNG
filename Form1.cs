@@ -22,27 +22,23 @@ namespace Constant_Length_Number_Generator
             string genBase = "";
             string[] ranges = textBox2.Text.Split('/');
             int rangeLow = ranges[0] == "" ? 0 : int.Parse(ranges[0]);
-            int rangeHigh = 0;
+            int rangeHigh = (int)Math.Pow(10, (double)numericUpDown1.Value) - 1;
             try
             {
-                rangeHigh = int.Parse(ranges[1]);
-                if (rangeHigh > (int)Math.Pow(10, (double)numericUpDown1.Value) - 1)
-                    rangeHigh = (int)Math.Pow(10, (double)numericUpDown1.Value) - 1;
+                if (int.Parse(ranges[1]) < (int)Math.Pow(10, (double)numericUpDown1.Value) - 1)
+                    rangeHigh = int.Parse(ranges[1]);
             }
             catch (IndexOutOfRangeException ex)
             {
                 //This happens when the range box is either blank or just a single number without a '/'
-                if (ex.Message.Contains("Index was outside the bounds of the array"))
-                {
-                    rangeHigh = (int)Math.Pow(10, (double)numericUpDown1.Value) - 1;
-                }
+                if (ex.Message.Contains("Index was outside the bounds of the array")) ;
                 else
                     throw ex;
             }
             //Tell users what is wrong with thier inputs?
 
             //Generate the base that will be used to fill in blank spaces. A length of 4 will make a base of '0000';
-            for (int i = 0; i < (numericUpDown1.Value != 0 ? numericUpDown1.Value : rangeHigh.ToString().Length); i++) { genBase += "0"; }
+            for (int i = 0; i < rangeHigh.ToString().Length; i++) { genBase += "0"; }
             progressBar1.Minimum = rangeLow;
             progressBar1.Maximum = rangeHigh;
             Stopwatch stopwatch = new Stopwatch();
@@ -51,7 +47,6 @@ namespace Constant_Length_Number_Generator
             int index = 0;
             for (int i = rangeLow; i <= rangeHigh; i++)
             {
-                
                 //TODO: make update interval dynamic
                 if (i % 10 == 0) progressBar1.Value = i;
                 try
