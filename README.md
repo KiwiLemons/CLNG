@@ -14,6 +14,3 @@ Setting the length option to 4
 ```
 Length is prioritised over range. Meaning that no numbers will be generated larger than the greatest number possible for a given length
 For example, with range of 0/1000 and a length of 3 set, the last number generated will be 999
-
-## Problems
-* It's pretty slow, and there are no threads. Generating values from 0/99999 takes around 35.5 seconds for my computer.
