@@ -25,7 +25,9 @@ namespace Constant_Length_Number_Generator
             int rangeHigh = 0;
             try
             {
-                rangeHigh = ranges[1] == "" ? (int)Math.Pow(10, (double)numericUpDown1.Value) - 1 : int.Parse(ranges[1]);
+                rangeHigh = int.Parse(ranges[1]);
+                if (rangeHigh > (int)Math.Pow(10, (double)numericUpDown1.Value) - 1)
+                    rangeHigh = (int)Math.Pow(10, (double)numericUpDown1.Value) - 1;
             }
             catch (IndexOutOfRangeException ex)
             {
@@ -50,7 +52,7 @@ namespace Constant_Length_Number_Generator
             for (int i = rangeLow; i <= rangeHigh; i++)
             {
                 
-                //Slows down the prgm a lil
+                //TODO: make update interval dynamic
                 if (i % 10 == 0) progressBar1.Value = i;
                 try
                 {
